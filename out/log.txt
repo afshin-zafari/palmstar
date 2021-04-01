@@ -1,0 +1,19 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                 Start of Log
+------------------------------------------------------------------------------------------------------------------------------------------------------
+            src/unit_tests.cpp,  test_exact_equality,   35 : duplicate key is genereated.
+            src/unit_tests.cpp,  test_exact_equality,   35 : duplicate key is genereated.
+            src/unit_tests.cpp,  test_exact_equality,   35 : duplicate key is genereated.
+            src/unit_tests.cpp,  test_exact_equality,   35 : duplicate key is genereated.
+            src/unit_tests.cpp,  test_exact_equality,   49 : no of hands              = 100
+            src/unit_tests.cpp,  test_exact_equality,   50 : no of features per hand  = 50
+            src/unit_tests.cpp,  test_exact_equality,   51 : size of one feature      = 64 bytes
+            src/unit_tests.cpp,  test_exact_equality,   52 : bits per hand            = 25600 
+            src/unit_tests.cpp,  test_exact_equality,   53 : Average time for search  = 0.06 micro-seconds
+            src/unit_tests.cpp,       CreateFeatures,   60 : 
+            src/unit_tests.cpp,       CreateFeatures,   67 : constructed from string: 0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF
+            src/unit_tests.cpp,       CreateFeatures,   68 : converted     to string: 0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF
+            src/unit_tests.cpp,       CreateFeatures,   70 : passed the test successfully
+------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                 End of Log
+------------------------------------------------------------------------------------------------------------------------------------------------------

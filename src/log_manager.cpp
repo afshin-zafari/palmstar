@@ -1,4 +1,5 @@
     #include "log_manager.hpp"
+    
     const int DashLength = 150;
     const int SpaceLength = DashLength /2-10;
 

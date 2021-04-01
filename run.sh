@@ -4,7 +4,7 @@ make
 echo
 echo "Start running the program."
 echo
-./out/palmmain > $LOG_FILE
+./out/palmmain &> $LOG_FILE
 
 echo
 echo "program finished with output in '$LOG_FILE'"

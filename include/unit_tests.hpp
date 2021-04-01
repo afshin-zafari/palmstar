@@ -4,12 +4,14 @@
 #include <functional>
 #include <chrono>
 #include <map>
+#include <cassert>
 
 #include "parameters.hpp"
 #include "log_manager.hpp"
 #include "create_features.hpp"
+#include "palm_features.hpp"
 
-typedef std::bitset<bits_per_hand> FeaturesBits;
+typedef std::bitset<Parameters::bits_per_hand> FeaturesBits;
 typedef FeaturesBits *FeaturesBitPtr;
 
 
@@ -21,5 +23,9 @@ auto now=[](){return std::chrono::steady_clock::now();};
 namespace UnitTests{
     namespace ExactMatch{
         void test_exact_equality();
+    }
+    namespace FeatureBasics
+    {
+        void CreateFeatures();
     }
 }

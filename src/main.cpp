@@ -4,5 +4,6 @@ int main()
 { 
     LogStart();
     UnitTests::ExactMatch::test_exact_equality();
+    UnitTests::FeatureBasics::CreateFeatures();
     LogFinish();
 }
