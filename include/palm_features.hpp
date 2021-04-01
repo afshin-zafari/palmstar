@@ -19,6 +19,7 @@ class OneFeature
     ByteVectorPtr Bytes;
     void set_value(std::string);
     OneFeature(int);
+    OneFeature(std::vector<int>  &);
     OneFeature(std::string);
     std::string to_string();
 };

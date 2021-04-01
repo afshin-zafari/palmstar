@@ -8,7 +8,7 @@
         //char s[400] ;
         //sprintf(s,"%30.30s, %20.20s, %4d : ", file.c_str(), function.c_str(), line_no);
         std::cerr << std::setw(30) << file << ", ";
-        std::cerr << std::setw(20) << function << ", ";
+        std::cerr << std::setw(30) << function << ", ";
         std::cerr << std::setw(4)  << line_no  << " : " ;
     }
     void LogStart()

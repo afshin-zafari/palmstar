@@ -17,6 +17,17 @@ OneFeature::OneFeature(std::string hex_string)
         _Bytes[i] = (byte)b;
     }
 }
+OneFeature::OneFeature(std::vector<int>  &list)
+{
+    _no_of_bytes = list.size();
+    this->Bytes = new ByteVector(_no_of_bytes);
+    ByteVector &_Bytes = *Bytes;
+    short int b;
+    for(int i=0; i < _no_of_bytes; i++)    
+    {
+        _Bytes[i] = (byte)list[i];
+    }
+}
 std::string OneFeature::to_string()
 {
     ByteVector &_Bytes = *Bytes;

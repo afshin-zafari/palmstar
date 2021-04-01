@@ -27,5 +27,6 @@ namespace UnitTests{
     namespace FeatureBasics
     {
         void CreateFeatures();
+        void CreateFeaturesIntArray();
     }
 }
