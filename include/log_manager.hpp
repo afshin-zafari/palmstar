@@ -1,5 +1,7 @@
-#include <iostream>
 #pragma once
+#include <iostream>
+#include <sstream>
+#include <iomanip>
   
 enum LogTags
 {
@@ -8,7 +10,12 @@ enum LogTags
 }
 _LogTags;
 #ifndef LogWrtie
-#define LogWrite(tag,text) \
-        callLog(tag,text,__FILE__,__PRETTY_FUNCTION__,__LINE__)
+#define LogWrite(tag,format, args...) \
+        callLog(tag,__FILE__,__FUNCTION__,__LINE__);\
+        fprintf(stderr, format, ##args);\
+        fprintf(stderr, "\n");
 #endif
-void callLog(LogTags tag, std::string text, std::string file, std::string function, int line_no);
+void callLog(LogTags tag, std::string file, std::string function, int line_no);
+void LogStart();
+void LogFinish();
+
