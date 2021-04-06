@@ -8,6 +8,10 @@ OneFeature::OneFeature(std::string hex_string)
 {
     _no_of_bytes = hex_string.length()/2;
     this->Bytes = new ByteVector(_no_of_bytes);
+
+    if (Bits.size() < _no_of_bytes * 8)
+        Bits.reset();
+
     ByteVector &_Bytes = *Bytes;
     short int b;
     for(int i=0; i < _no_of_bytes; i++)    
@@ -15,6 +19,12 @@ OneFeature::OneFeature(std::string hex_string)
         std::istringstream ss( hex_string.substr(i*2,2));
         ss >> std::hex >> b;
         _Bytes[i] = (byte)b;
+        if ( Bits.size() < _no_of_bytes * 8)
+        {
+            FeatureDataType bits (static_cast<long>(b));
+            Bits <<= 8;
+            Bits |= bits;
+        }
     }
 }
 OneFeature::OneFeature(std::vector<int>  &list)
@@ -22,10 +32,18 @@ OneFeature::OneFeature(std::vector<int>  &list)
     _no_of_bytes = list.size();
     this->Bytes = new ByteVector(_no_of_bytes);
     ByteVector &_Bytes = *Bytes;
+    if (Bits.size() <= _no_of_bytes * 8)
+        Bits.reset();
     short int b;
     for(int i=0; i < _no_of_bytes; i++)    
     {
         _Bytes[i] = (byte)list[i];
+        if ( Bits.size() <= _no_of_bytes * 8)
+        {
+            FeatureDataType bits (static_cast<long>(list[i]));
+            Bits <<= 8;
+            Bits |= bits;
+        }
     }
 }
 std::string OneFeature::to_string()
@@ -39,4 +57,10 @@ std::string OneFeature::to_string()
         ss << s ;
     }
     return ss.str();
+}
+std::string OneFeature::to_bit_string()
+{
+    if ( Bits.size() <= _no_of_bytes * 8)
+        return Bits.to_string();
+    return "";
 }

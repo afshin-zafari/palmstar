@@ -59,9 +59,9 @@ namespace UnitTests{
         {
             LogWrite(DEBUG_LEVEL,"")
             std::string ss, in_str;
-            ss = "0123456789ABCDEF" ;
-            in_str  = ss + ss + ss + ss;
-            in_str += ss + ss + ss + ss;
+            ss = "0123456789ABCDEF" ;     // 16 characters long, one hex charcater for 4 bits
+            in_str  = ss + ss + ss + ss;  // it is now 64 hex characters
+            in_str += ss + ss + ss + ss;  // and finally 128 hex charcaters == 64 bytes
             OneFeature f(in_str);
             std::string fs= f.to_string();
             LogWrite(DEBUG_LEVEL, "constructed from string: %s", in_str.c_str());
