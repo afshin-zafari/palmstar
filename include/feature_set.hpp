@@ -7,7 +7,7 @@ public:
   int             no_of_features;
   FeatureArrayPtr FeatureValues;
   OneFeature     *get_feature(int);
-  void            set_feature(int, OneFeature *);
+  void            set_feature_value(int, OneFeature *);
   void            PopulateRandom();
   void            TweakBits(int no_of_bits_per_feature);
   int             CopyTo(FeatureSetPtr fs_dest);

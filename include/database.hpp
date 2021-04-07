@@ -25,4 +25,5 @@ class Database
     void CreateDatabase();
     void PopulateRandom(int bits_distance);
     void DumpRecordsView(int record_start, int record_end, int feature_start, int feature_end);
+    void ReportHandsVariations(PersonID person, HandID hand);
 };

@@ -68,6 +68,26 @@ std::string OneFeature::to_bit_string()
         return Bits.to_string();
     return "";
 }
+byte OneFeature::get_byte_from_bitset(int byte_index)
+{
+    int  b = 0;
+    for(int i=0; i< 8; i++)
+    {
+        if (Bits[byte_index * 8+i]) 
+            b |= 1<<(7-i);
+    }
+    return (byte)b;
+}
+
+void OneFeature::get_value_from_bits()
+{
+    ByteVector &_Bytes = *Bytes;
+    for(int bi =0; bi < _no_of_bytes; bi++)
+    {
+        auto bval=get_byte_from_bitset(bi);
+        _Bytes[bi]= bval;
+    }
+}
 void OneFeature::PopulateRandom()
 {
     ByteVector &_Bytes = *Bytes;
@@ -85,8 +105,28 @@ void OneFeature::PopulateRandom()
 }
 void OneFeature::TweakBits(int no_of_bits)
 {
-    for(int i=0, j=0;i <Bits.size() && j < no_of_bits; i+=3, j++)
+    //LogWrite(DEBUG_LEVEL,"before tweak: %s", to_string().c_str())
+    auto fcopy = Bits;
+    for(int j=0;j < no_of_bits;  j++)    
     {
-        Bits[i] = Bits[i] ^ true;
+        int i = std::rand() % Bits.size(); 
+        Bits[i] = Bits[i] ^ true;        
     }
+    get_value_from_bits();
+    //LogWrite(DEBUG_LEVEL," after tweak: %s", to_string().c_str());
+    //LogWrite(DEBUG_LEVEL," diff count : %ld", (fcopy ^ Bits).count());
+    assert(((fcopy ^ Bits).count() >0 ));
+}
+double OneFeature::Difference(OneFeature*f)
+{
+    double result = 0.0;
+    auto diff = f->Bits ^ Bits;
+    LogWrite(DEBUG_LEVEL,"dif-bits count:%ld",diff.count());
+    result = (diff.count() * 1.0) / Bits.size();
+    return result;
+}
+void OneFeature::copy_value_from(OneFeature *f)
+{
+    Bits = FeatureDataType(f->Bits.to_string());
+    get_value_from_bits();
 }

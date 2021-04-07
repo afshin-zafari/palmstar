@@ -21,7 +21,6 @@ void Database::PopulateRandom(int bits_distance)
         {
             auto originalRecord = records->at(record_index);
             auto originalFS = originalRecord ->features;
-            LogWrite(DEBUG_LEVEL,"");
             originalRecord ->features->PopulateRandom();
             originalRecord ->person_id = p;
             originalRecord ->hand_id = h;
@@ -30,7 +29,7 @@ void Database::PopulateRandom(int bits_distance)
                 record_index++;
                 if ( record_index >=records->size())
                     break;
-                originalFS->CopyTo(records->at(record_index)->features);
+                int res = originalFS->CopyTo(records->at(record_index)->features);
                 records->at(record_index)->features->TweakBits(bits_distance);
                 records->at(record_index)->person_id = p;
                 records->at(record_index)->hand_id = h;
@@ -46,6 +45,7 @@ void Database::DumpRecordsView(int record_start, int record_end, int feature_sta
             break;
         LogWrite(DEBUG_LEVEL,"person id: %ld, hand_id:%ld",(long)records->at(record_index)->person_id, (long)records->at(record_index)->hand_id )
         LogWrite(DEBUG_LEVEL,"features from %d to %d" , feature_start, feature_end);
+        LogWrite(DEBUG_LEVEL,"record index %d", record_index);
         std::string row;
         for ( int j=feature_start; j < feature_end; j++)
         {
@@ -55,4 +55,15 @@ void Database::DumpRecordsView(int record_start, int record_end, int feature_sta
         LogWrite(DEBUG_LEVEL,"%s",row.replace(row.size() -1 ,1," ").c_str());
 
     }
+}
+void Database::ReportHandsVariations(PersonID person, HandID hand)
+{
+    for(int record_index=0; record_index < records->size(); record_index++)
+    {
+        if ( records->at(record_index)->person_id != person) continue;
+        if ( records->at(record_index)->hand_id != hand) continue;
+
+        
+    }
+
 }

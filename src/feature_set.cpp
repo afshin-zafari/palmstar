@@ -12,9 +12,9 @@ OneFeature *FeatureSet::get_feature(int i)
 {
     return FeatureValues->at(i);
 }
-void FeatureSet::set_feature(int i,OneFeature *fs)
+void FeatureSet::set_feature_value(int i,OneFeature *fs)
 {
-    FeatureValues->at(i) = fs;
+    FeatureValues->at(i)->copy_value_from (fs);
 }
 void FeatureSet::PopulateRandom()
 {
@@ -33,7 +33,7 @@ int FeatureSet::CopyTo(FeatureSetPtr fs_dest)
     if (fs_dest->no_of_features < this->no_of_features)
         return -1;
     for(int i=0; i<no_of_features; i++)
-        fs_dest->set_feature(i,get_feature(i));
+        fs_dest->set_feature_value(i,get_feature(i));
     return 0;
 }
 std::string  FeatureSet::to_string()
