@@ -10,6 +10,10 @@
 #include "log_manager.hpp"
 #include "create_features.hpp"
 #include "palm_features.hpp"
+#include "database.hpp"
+
+#define UNIT_TEST_RESULT(a)\
+        LogWrite(DEBUG_LEVEL,"Test Result\t\t\t\t\t[%s]", (a) ? "PASSED" : "FAILED")
 
 typedef std::bitset<Parameters::bits_per_hand> FeaturesBits;
 typedef FeaturesBits *FeaturesBitPtr;
@@ -29,4 +33,9 @@ namespace UnitTests{
         void CreateFeatures();
         void CreateFeaturesIntArray();
     }
+    namespace DatabaseTests
+    {
+        void CreateRandomDB();
+    }
+
 }

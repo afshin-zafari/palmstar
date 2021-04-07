@@ -27,17 +27,9 @@ class OneFeature
     OneFeature(std::string);
     std::string to_string();
     std::string to_bit_string();
+    void PopulateRandom();
+    void TweakBits(int);
 };
 
-typedef std::vector<OneFeature> FeatureArray;
+typedef std::vector<OneFeature*> FeatureArray;
 typedef FeatureArray *FeatureArrayPtr;
-class FeatureSet
-{
-    public:
-    int no_of_features ;
-    FeatureArrayPtr Set;
-    FeatureSet();
-    std::string to_string();
-
-};
-typedef FeatureSet *FeatureSetPtr;

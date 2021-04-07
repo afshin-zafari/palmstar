@@ -6,5 +6,6 @@ int main()
     UnitTests::ExactMatch::test_exact_equality();
     UnitTests::FeatureBasics::CreateFeatures();
     UnitTests::FeatureBasics::CreateFeaturesIntArray();
+    UnitTests::DatabaseTests::CreateRandomDB();
     LogFinish();
 }
