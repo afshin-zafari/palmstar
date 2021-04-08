@@ -17,10 +17,10 @@ typedef ByteVector *ByteVectorPtr;
 class OneFeature
 {
     private:
-    int _no_of_bytes ;
     int id;
     void get_value_from_bits();
     public:
+    int _no_of_bytes ;
     ByteVectorPtr Bytes;
     FeatureDataType Bits;
     OneFeature(int);
@@ -34,6 +34,6 @@ class OneFeature
     byte get_byte_from_bitset(int byte_index);
     void copy_value_from(OneFeature *);
 };
-
+typedef OneFeature *OneFeaturePtr;
 typedef std::vector<OneFeature*> FeatureArray;
 typedef FeatureArray *FeatureArrayPtr;

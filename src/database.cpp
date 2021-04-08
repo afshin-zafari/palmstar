@@ -17,7 +17,7 @@ void Database::PopulateRandom(int bits_distance)
     long record_index = 0;
     for (int p=0; p< DbStructure.no_of_persons; p++)
     {
-        for (int h = 0; h<2; h++)
+        for (int h = 0; h<3; h++)
         {
             auto originalRecord = records->at(record_index);
             auto originalFS = originalRecord ->features;
