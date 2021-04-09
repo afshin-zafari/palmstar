@@ -15,10 +15,15 @@ void Database::CreateDatabase()
 void Database::PopulateRandom(int bits_distance)
 {
     long record_index = 0;
+    LogWrite(DEBUG_LEVEL,"");
     for (int p=0; p< DbStructure.no_of_persons; p++)
     {
+        LogWrite(DEBUG_LEVEL,"");
         for (int h = 0; h<3; h++)
         {
+            LogWrite(DEBUG_LEVEL,"");
+            if ( record_index >= records->size() )
+                break;
             auto originalRecord = records->at(record_index);
             auto originalFS = originalRecord ->features;
             originalRecord ->features->PopulateRandom();
@@ -26,6 +31,7 @@ void Database::PopulateRandom(int bits_distance)
             originalRecord ->hand_id = h;
             for (int nh = 0; nh < DbStructure.no_of_records_for_a_hand; nh++ )            
             {
+                LogWrite(DEBUG_LEVEL,"");
                 record_index++;
                 if ( record_index >=records->size())
                     break;
@@ -39,8 +45,10 @@ void Database::PopulateRandom(int bits_distance)
 }
 void Database::DumpRecordsView(int record_start, int record_end, int feature_start, int feature_end)
 {
+    LogWrite(DEBUG_LEVEL,"");
     for(int record_index=record_start; record_index < record_end; record_index++)
     {
+        LogWrite(DEBUG_LEVEL,"");
         if ( record_index >=records->size())
             break;
         LogWrite(DEBUG_LEVEL,"person id: %ld, hand_id:%ld",(long)records->at(record_index)->person_id, (long)records->at(record_index)->hand_id )

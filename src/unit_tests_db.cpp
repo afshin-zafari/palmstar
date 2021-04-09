@@ -6,6 +6,7 @@ namespace UnitTests
     {
         void CreateRandomDB()
         {
+            FUNCTION_PROFILING;
             Database db;
             const int bits_distance_for_tweak = 5;
             db.DbStructure.bits_per_feature = Parameters::bits_per_feature;

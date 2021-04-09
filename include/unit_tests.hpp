@@ -11,6 +11,7 @@
 #include "create_features.hpp"
 #include "palm_features.hpp"
 #include "database.hpp"
+#include "profiler.hpp"
 
 #define UNIT_TEST_RESULT(a)\
         LogWrite(DEBUG_LEVEL,"Test Result\t\t\t\t\t[%s]", (a) ? "PASSED" : "FAILED")
