@@ -117,7 +117,7 @@ void OneFeature::TweakBits(int no_of_bits)
     //LogWrite(DEBUG_LEVEL," diff count : %ld", (fcopy ^ Bits).count());
     assert(((fcopy ^ Bits).count() >0 ));
 }
-double OneFeature::Difference(OneFeature*f)
+float OneFeature::DifferenceWith(OneFeature*f)
 {
     double result = 0.0;
     auto diff = f->Bits ^ Bits;
@@ -129,4 +129,8 @@ void OneFeature::copy_value_from(OneFeature *f)
 {
     Bits = FeatureDataType(f->Bits.to_string());
     get_value_from_bits();
+}
+uint OneFeature::GetBitCountGroup()
+{
+    return Bits.count() / BitCountGroupSize ;
 }

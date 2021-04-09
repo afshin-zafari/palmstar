@@ -20,6 +20,7 @@ class OneFeature
     int id;
     void get_value_from_bits();
     public:
+    static const uint BitCountGroupSize = 32;
     int _no_of_bytes ;
     ByteVectorPtr Bytes;
     FeatureDataType Bits;
@@ -30,10 +31,11 @@ class OneFeature
     std::string to_bit_string();
     void PopulateRandom();
     void TweakBits(int);
-    double Difference(OneFeature*);
+    float DifferenceWith(OneFeature*);
     byte get_byte_from_bitset(int byte_index);
     void copy_value_from(OneFeature *);
+    uint GetBitCountGroup();
 };
 typedef OneFeature *OneFeaturePtr;
-typedef std::vector<OneFeature*> FeatureArray;
+typedef std::vector<OneFeaturePtr> FeatureArray;
 typedef FeatureArray *FeatureArrayPtr;

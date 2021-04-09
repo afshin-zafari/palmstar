@@ -50,7 +50,7 @@ void ClusterDB::BuildBitsCluster()
                 sum += hand_f->bit_count;
                 count++;
             }
-            ulong avg = sum / count;
+            ulong avg = sum / count / OneFeature::BitCountGroupSize;
             auto bc = *columns->at(col)->bit_count_cluster;
             if (bc[avg] == nullptr)
             {

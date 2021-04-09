@@ -3,6 +3,10 @@
 #include "palm_features.hpp"
 #include "database.hpp"
 typedef ulong HandUniqueID;
+HandUniqueID GetHandUniqueID(PersonID person_id, HandID hand_id)
+{
+  return (person_id << 2) + (hand_id %4);
+}
 struct HandOneFeature
 {
   OneFeaturePtr feature;
@@ -46,3 +50,4 @@ class ClusterDB
     void BuildBitsCluster(void);
     void ClusterTheDB(void);
 };
+typedef ClusterDB *ClusterDBPtr;
