@@ -2,10 +2,25 @@
 #include <map>
 #include "palm_features.hpp"
 #include "database.hpp"
-typedef ulong HandUniqueID;
+typedef std::pair<PersonID,HandID> PersonHandPair;
+typedef ulong HandUniqueID_IntegralType;
+class HandUniqueID
+{
+  private:
+  PersonID person_id;
+  HandID hand_id;  
+  public: 
+  HandUniqueID_IntegralType ul_hand_unique_id;
+  HandUniqueID();
+  HandUniqueID(PersonID p, HandID h);
+  PersonHandPair GetPersonAndHand();
+  void Set(PersonID p, HandID h);
+};
+typedef HandUniqueID *HandUniqueIDPtr;
 HandUniqueID GetHandUniqueID(PersonID person_id, HandID hand_id)
 {
-  return (person_id << 2) + (hand_id %4);
+  HandUniqueID h(person_id,hand_id);
+  return h;
 }
 struct HandOneFeature
 {
@@ -15,22 +30,31 @@ struct HandOneFeature
   ushort        bit_count;
   HandOneFeature (HandUniqueID,OneFeaturePtr);
 };
-typedef HandOneFeature *HandOneFeaturePtr;
+typedef HandOneFeature *               HandOneFeaturePtr;
 typedef std::vector<HandOneFeaturePtr> ArrayOfHandOneFeature;
-typedef ArrayOfHandOneFeature *ArrayOfHandOneFeaturePtr;
-typedef std::map<HandUniqueID,ArrayOfHandOneFeaturePtr> HandClusterType;
+typedef ArrayOfHandOneFeature *        ArrayOfHandOneFeaturePtr;
+typedef std::map<HandUniqueID_IntegralType, ArrayOfHandOneFeaturePtr> HandClusterType;
 
-typedef HandClusterType *HandClusterTypePtr;
-typedef std::vector<HandUniqueID> ArrayOfHandUniqueID;
-typedef ArrayOfHandUniqueID *ArrayOfHandUniqueIDPtr;
-typedef std::map<uint,ArrayOfHandUniqueIDPtr> BitCountClusterType;
-typedef BitCountClusterType *BitCountClusterTypePtr;
+typedef HandClusterType *                            HandClusterTypePtr;
+typedef std::vector<HandUniqueIDPtr>                 ArrayOfHandUniqueID;
+typedef ArrayOfHandUniqueID *                        ArrayOfHandUniqueIDPtr;
+typedef unsigned long long                           ClusterKey;
+typedef std::map<ClusterKey, ArrayOfHandUniqueIDPtr> FeatureClusterType;
+typedef FeatureClusterType *                         FeatureClusterTypePtr;
+
+struct ClusterInfo
+{
+  ClusterKey cluster_center;
+
+
+
+};
 
 class OneFeatureCluster 
 {
     public:
     HandClusterTypePtr hands_cluster; // hand_id -> array of one feature of a hand 
-    BitCountClusterTypePtr bit_count_cluster;
+    FeatureClusterTypePtr bit_count_cluster;
     OneFeatureCluster();
     void InsertFeature(HandUniqueID, OneFeaturePtr);
 };
@@ -51,3 +75,14 @@ class ClusterDB
     void ClusterTheDB(void);
 };
 typedef ClusterDB *ClusterDBPtr;
+class rBRIFAlgorithm
+{
+  
+  public:
+  struct Parameters
+  {
+    int SubFeature_offset, SubFeature_length;
+    int no_of_features_per_hash;
+  };
+
+};

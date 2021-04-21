@@ -10,7 +10,7 @@ LINKER=g++
 APP_NAME=palmmain
 
 LINK_FLAGS= -lrt  -lstdc++ -Wl,--allow-multiple-definition
-COMP_FLAGS= -I$(HEADER_DIR) -std=c++17 -O2 -Wno-format-extra-args -Wno-format-zero-length
+COMP_FLAGS= -I$(HEADER_DIR) -std=c++17 -O3 -Wno-format-extra-args -Wno-format-zero-length
 #########################################################
 sources    :=$(notdir $(shell ls -Sr $(SOURCE_DIR)/*.cpp))
 objnames   :=$(sources:%.cpp=%.o)

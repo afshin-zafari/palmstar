@@ -75,3 +75,8 @@ void Database::ReportHandsVariations(PersonID person, HandID hand)
     }
 
 }
+HandRecord::HandRecord ()
+{
+    PalmPrintFeatures = new ArrayOfPalmPrintFeatures();
+    VeinFeatures = new ArrayOfVeinImageFeatures();
+}

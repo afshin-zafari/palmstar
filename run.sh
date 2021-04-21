@@ -13,3 +13,5 @@ echo
 
 grep "Test Result" $LOG_FILE > $TEST_RESULT
 cat $TEST_RESULT
+
+grep "PROFILING" $LOG_FILE 

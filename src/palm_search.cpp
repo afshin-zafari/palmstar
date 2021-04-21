@@ -20,7 +20,7 @@ void Search::SearchForFeature(int f)
     auto hand_list = *bit_cluster[bit_count];
     for(auto hand : hand_list)
     {
-        auto hands_feature_values = *hand_cluster[hand];
+        auto hands_feature_values = *hand_cluster[hand->ul_hand_unique_id];
         float max_diff = 0.0;
         float min_diff = 0.0;
         HandUniqueID hand_uid;
@@ -28,14 +28,13 @@ void Search::SearchForFeature(int f)
         {
             auto diff = query_feature.DifferenceWith(feature_value->feature);
             max_diff == (max_diff > diff) ? max_diff : diff;
-            min_diff == (min_diff < diff) ? min_diff : diff;
-            hand_uid = GetHandUniqueID(feature_value->person_id,feature_value->hand_id);
+            min_diff == (min_diff < diff) ? min_diff : diff;            
+            hand_uid.Set(feature_value->person_id,feature_value->hand_id);
         }
         if (IsAcceptableDifference(min_diff, max_diff))
         {
             auto candidates = *local_searches->at(f)->candidates;
-            auto hand_candidate = new CandidateHand();
-            hand_candidate->hand_id = hand_uid;
+            auto hand_candidate = new CandidateHand(hand_uid);
             hand_candidate->score = 1-max_diff;
             candidates.push_back(hand_candidate);
         }
@@ -45,4 +44,8 @@ void Search::SearchForFeature(int f)
 bool Search::IsAcceptableDifference(float min_diff, float max_diff)
 {   
     return (1-max_diff) > 0.6 && (1-min_diff) > 0.6;
+}
+CandidateHand::CandidateHand(HandUniqueID h)
+{
+    hand_id = h;
 }

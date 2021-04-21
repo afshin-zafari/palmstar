@@ -19,13 +19,13 @@ ClusterDB::ClusterDB(Database *db)
     for(int i=0; i<nf; i++)
     {
         columns->at(i)->hands_cluster = new HandClusterType();
-        columns->at(i)->bit_count_cluster = new BitCountClusterType();
+        columns->at(i)->bit_count_cluster = new FeatureClusterType();
     }
     ClusterTheDB();
 }
 HandUniqueID ClusterDB::GetUniqueID(Database::DbRecordTypePtr record)
 {
-    HandUniqueID result;//TODO
+    HandUniqueID result(record->person_id,record->hand_id);
     return result;
 }
 void ClusterDB::InsertFeature(Database::DbRecordTypePtr record, int feature_index)
@@ -43,20 +43,6 @@ void ClusterDB::BuildBitsCluster()
         {
             auto _features = *hand_feature.second;
             auto hand_uid = hand_feature.first;
-            ulong sum = 0;
-            uint count = 0;
-            for( auto hand_f: _features)
-            {
-                sum += hand_f->bit_count;
-                count++;
-            }
-            ulong avg = sum / count / OneFeature::BitCountGroupSize;
-            auto bc = *columns->at(col)->bit_count_cluster;
-            if (bc[avg] == nullptr)
-            {
-                bc[avg] =  new ArrayOfHandUniqueID();
-            }
-            bc[avg]->push_back(hand_uid);
         }
     }
 
@@ -64,18 +50,39 @@ void ClusterDB::BuildBitsCluster()
 void OneFeatureCluster::InsertFeature(HandUniqueID hand, OneFeaturePtr fp)
 {
     HandClusterType &hc = *hands_cluster;
-    if ( hc[hand] == nullptr)
+    if ( hc[hand.ul_hand_unique_id] == nullptr)
     {
-        hc[hand]  = new ArrayOfHandOneFeature();
+        hc[hand.ul_hand_unique_id]  = new ArrayOfHandOneFeature();
     }
     auto h_f = new HandOneFeature(hand,fp);
-    hc[hand]->push_back(h_f);
+    hc[hand.ul_hand_unique_id]->push_back(h_f);
 }
 HandOneFeature::HandOneFeature(HandUniqueID hand,OneFeaturePtr fp)
 {
     feature = new OneFeature(fp->_no_of_bytes);
     feature->copy_value_from(fp);
-    hand_id = hand & 0x03;
-    person_id = hand >> 2;
+    person_id = hand.GetPersonAndHand().first;
+    hand_id = hand.GetPersonAndHand().second;
     bit_count = feature->Bits.count();
+}
+HandUniqueID::HandUniqueID(PersonID p, HandID h)
+{
+    Set(p,h);
+}
+PersonHandPair HandUniqueID::GetPersonAndHand()
+{
+    PersonHandPair h(person_id,hand_id);
+    return h;
+}
+HandUniqueID::HandUniqueID()
+{
+    person_id = 0;
+    hand_id = 0;
+    ul_hand_unique_id = 0;
+}
+void HandUniqueID::Set(PersonID p, HandID h)
+{
+    person_id = p;
+    hand_id = h;
+    ul_hand_unique_id = person_id << 2  | hand_id & 0x03;        
 }

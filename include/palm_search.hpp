@@ -5,6 +5,7 @@ struct CandidateHand
 {
     HandUniqueID hand_id;
     float score;
+    CandidateHand(HandUniqueID h);
 };
 typedef CandidateHand *CandidateHandPtr;
 typedef std::vector<CandidateHandPtr> ArrayOfCandidateHands;

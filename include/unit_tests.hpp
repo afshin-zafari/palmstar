@@ -12,6 +12,7 @@
 #include "palm_features.hpp"
 #include "database.hpp"
 #include "profiler.hpp"
+#include <random>
 
 #define UNIT_TEST_RESULT(a)\
         LogWrite(DEBUG_LEVEL,"Test Result\t\t\t\t\t[%s]", (a) ? "PASSED" : "FAILED")
@@ -37,6 +38,9 @@ namespace UnitTests{
     namespace DatabaseTests
     {
         void CreateRandomDB();
+        void BruteForcePerformanceTest();
+        void BruteForcePerformanceTest2();
+        void TestMatrixCompare();
     }
 
 }
