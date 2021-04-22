@@ -1,5 +1,6 @@
 
 #pragma once
+
 #include <vector>
 #include <string>
 #include <sstream>
@@ -8,6 +9,7 @@
 #include <cstddef>
 #include <bitset>
 #include <assert.h>
+#include <cstddef>
 #include "parameters.hpp"
 typedef std::byte byte;
 typedef std::bitset<Parameters::bits_per_feature> FeatureDataType;
