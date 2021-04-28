@@ -11,7 +11,8 @@
 #include <assert.h>
 #include <cstddef>
 #include "parameters.hpp"
-typedef std::byte byte;
+//typedef std::byte byte;
+typedef unsigned char byte;
 typedef std::bitset<Parameters::bits_per_feature> FeatureDataType;
 typedef std::vector<byte> ByteVector;
 typedef ByteVector *ByteVectorPtr;

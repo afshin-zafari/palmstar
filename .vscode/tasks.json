@@ -12,6 +12,8 @@
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-I",
                 "${workspaceFolder}/include",
+                "-I",
+                "/home/afshin/JSONCPP/rapidjson/include/",
                 "-std=c++17",
                 ""
             ],
