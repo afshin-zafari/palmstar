@@ -12,6 +12,7 @@
 #include "palm_features.hpp"
 #include "database.hpp"
 #include "profiler.hpp"
+#include "json_input.hpp"
 #include <random>
 
 #define UNIT_TEST_RESULT(a)\
@@ -41,6 +42,7 @@ namespace UnitTests{
         void BruteForcePerformanceTest();
         void BruteForcePerformanceTest2();
         void TestMatrixCompare();
+        void LoadPersonFromJSONFile();
     }
 
 }

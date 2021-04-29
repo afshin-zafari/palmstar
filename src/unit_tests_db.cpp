@@ -146,5 +146,16 @@ namespace UnitTests
             }
             UNIT_TEST_RESULT(true);
         }
+        void LoadPersonFromJSONFile()
+        {
+            std::string json_filename("./person_00.json");
+            auto p = CreateNewPersonFromJSON(json_filename);
+            LogWrite(DEBUG_LEVEL,"index finger length : %f",p->LeftHandPalm->HandGeometries.IndexFinger.Length )
+            LogWrite(DEBUG_LEVEL,"Right hand.palm-print-feature[0].keypont.y : %f",p->RightHandPalm->PalmPrintFeatures[0]->Keypoint.y)
+
+            UNIT_TEST_RESULT((p->LeftHandPalm->HandGeometries.IndexFinger.Length - 72.42671873646435) < 1e-6);
+            UNIT_TEST_RESULT((p->RightHandPalm->PalmPrintFeatures[0]->Keypoint.y - 190.8213043) < 1e-6);
+            UNIT_TEST_RESULT( (p->RightHandPalm->PalmPrintFeatures[2]->Descriptor->Bytes[10] == static_cast<std::byte>(244)));
+        }
     }
 }
